@@ -1,12 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './mediascreen.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import GetLanguage from './components/wigets/GetLanguage';
+import {IntlProvider} from "react-intl";
+import messages_ru from "./translation/ru.json";
+import messages_uz from "./translation/uz.json";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const messages = {
+    'ru': messages_ru,
+    'uz': messages_uz
+};
+
+	
+var language = GetLanguage('language');
+if(language==null){
+	language = 'ru';
+}
+
+ReactDOM.render(<IntlProvider locale={language} messages={messages[language]}><App /></IntlProvider>, 
+	document.getElementById('root'));
+
+
+
+	
+
+
+
+
+
